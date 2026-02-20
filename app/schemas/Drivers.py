@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional
 
+# Base schema for the Drivers table
 class DriversBase(BaseModel):
     First_name: Optional[str] = None
     Last_name: Optional[str] = None
@@ -14,7 +15,8 @@ class DriversBase(BaseModel):
     Weight: Optional[int] = None
     Eyecolour: Optional[str] = None
 
+# Full schema for Drivers, allows orm mapping from the db models. 
 class Drivers(DriversBase):
     Drivers_license: int 
-    class config:
-        orm_mode = True
+    class Config:
+        from_attributes = True
