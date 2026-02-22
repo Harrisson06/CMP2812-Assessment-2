@@ -8,6 +8,7 @@ from app.models.Drivers import Drivers
 from app.models.Notice_actions import Notice_actions
 from app.models.officers import Officers
 from app.models.Vehicles import Vehicles
+from app.models.User import User
 
 def init_db():
     Base.metadata.create_all(bind=engine)
