@@ -9,7 +9,7 @@ class Drivers(Base):
     City = Column(String(30))
     State = Column(String(20))
     Zipcode = Column(String(5))
-    Drivers_license = Column(int, primary_key=True)
+    Drivers_license = Column(Integer, primary_key=True)
     State_issued_license = Column(String(15))
     Birthdate = Column(String(10))
     Height = Column(Integer)

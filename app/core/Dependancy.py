@@ -6,7 +6,7 @@ from jose import JWTError, jwt
 
 from app.db.session import get_db
 from app.CRUD import User as crud_user
-from app.core.Security import SECRET_KEY, ALGORITHM
+from app.core.security import SECRET_KEY, ALGORITHM
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="Login")
 

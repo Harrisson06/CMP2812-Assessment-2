@@ -3,7 +3,8 @@ from app.db.base import Base
 
 class Officers(Base):
     __tablename__ = "Officers"
+    __table_args__ = {"extend_existing": True}
     OfficerID = Column(Integer, primary_key=True, autoincrement=True)
-    First_name = Column(String(30))
-    Last_name = Column(String(30))
-    Perssonel_nunber = Column(Integer, unique=True)
+    FirstName = Column(String(30))
+    LastName = Column(String(30))
+    PerssonelNumber = Column(Integer, unique=True)
