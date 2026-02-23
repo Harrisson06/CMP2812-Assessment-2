@@ -1,22 +1,20 @@
 from pydantic import BaseModel
 from typing import Optional
+from datetime import date, time 
 
 # Base schema for the Corrections_notice table, defining the primary keys
 class CorrectionsNoticeBase(BaseModel):
-    Drivers_license: Optional[int] = None
-    Notice_issue_date: Optional[str] = None
+    DriversLicense: Optional[int] = None
+    noticeIssueDate: Optional[date] = None
     District: Optional[str] = None
     Location: Optional[str] = None
-    Violation_time: Optional[str] = None
-    Violation_desc: Optional[str] = None
+    ViolationTime: Optional[time] = None
+    ViolationDesc: Optional[str] = None
     Detachment: Optional[str] = None
-    OfficerID: Optional[str] = None
+    OfficerID: int 
 
 # Full schema for Corrections_notice, allows orm mapping from the db models. 
 class CorrectionsNotice(CorrectionsNoticeBase):
     NoticeID: int
     class config:
         from_attributes = True
-
-class CorrectionNoticeCreate(CorrectionsNoticeBase):
-    pass

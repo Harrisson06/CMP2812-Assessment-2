@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Date
 from app.db.base import Base
 
 class Drivers(Base):
@@ -11,7 +11,7 @@ class Drivers(Base):
     Zipcode = Column(String(5))
     DriverLicense = Column(Integer, primary_key=True)
     State_issued_license = Column(String(15))
-    Birthdate = Column(String(10))
+    Birthdate = Column(Date)
     Height = Column(Integer)
     Weight = Column(Integer)
     Eyecolour = Column(String(20))

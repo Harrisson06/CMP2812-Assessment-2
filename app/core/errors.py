@@ -1,2 +1,0 @@
-class ActionNotFoundError(Exception):
-    pass 
