@@ -14,8 +14,11 @@ def get_user_email_or_id(db: Session, identifier: str) -> Optional[UserModel]:
         officer_id = int(identifier)
         if officer_id == 0:
             officer_id = None
+        if DriversLicense == 0:
+            DriversLicense = None
     except ValueError:
         officer_id = None
+        DriversLicense = None
     # checks if the identifier matches the email or the OfficerID
     return db.query(UserModel).filter(
         (UserModel.email == identifier) | (UserModel.OfficerID == officer_id)
@@ -23,12 +26,13 @@ def get_user_email_or_id(db: Session, identifier: str) -> Optional[UserModel]:
 
 # Creates a new user and saves them to the database in Users table
 def create_user(db: Session, user_in: UserCreate) -> UserModel:
+    password_hash = hash_password(user_in.password)
     user = UserModel(
         email=user_in.email,
-        password_hash=hash_password(user_in.password), # Hashes the password before saving it
+        password_hash = password_hash, # Hashes the password before saving it
         role=user_in.role or "user", # If no role is placed defaults to user rather than a null field or error
-        OfficerID=user_in.OfficerID,
-        DriversLicense = user_in.DriversLicense
+        OfficerID=user_in.OfficerID, # Allows an officer to use their ID number instead of their email
+        DriversLicense = user_in.DriversLicense 
     )
 
     db.add(user)        # Add's the new user
