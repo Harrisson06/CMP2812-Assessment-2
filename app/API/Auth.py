@@ -9,7 +9,7 @@ from app.core.security import verify_password, create_access_token
 
 router = APIRouter(tags=["Authenticate"])
 
-@router.post("/api/Login", response_model=Token)
+@router.post("/Login", response_model=Token)
 def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = CRUD_user.get_user_email_or_id(db, form_data.username)
     print(user)
