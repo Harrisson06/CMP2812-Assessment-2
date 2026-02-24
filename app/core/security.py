@@ -23,7 +23,7 @@ def hash_password(password: str) -> str:
     print(f"Prehashed length: {len(prehashed)}")
     print(f"Prehashed value: {prehashed}")
     print(f"Password length: {len(prehashed)}")
-    return pwd_context.hash(prehash_password(prehashed))
+    return pwd_context.hash(prehashed)
 
 def verify_password(plain_password: str, password_hash: str) -> bool:
     return pwd_context.verify(prehash_password(plain_password), password_hash)

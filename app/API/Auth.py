@@ -12,11 +12,12 @@ router = APIRouter(tags=["Authenticate"])
 @router.post("/Login", response_model=Token)
 def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = CRUD_user.get_user_email_or_id(db, form_data.username)
+    print(user)
     if not user or not verify_password(form_data.password, user.password_hash):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect password or email address",
-            headers={"WWW-Authenticate": "Bearaer"}
+            headers={"WWW-Authenticate": "Bearer"}
         )
     token = create_access_token(subject=user.email)
-    return {"Access_token": token, "token_type": "Bearer"}
+    return {"access_token": token, "token_type": "Bearer"}

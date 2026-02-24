@@ -15,9 +15,3 @@ init_db()
 app.include_router(Corrections_router, prefix="/api", tags=["Corrections"])
 app.include_router(User_router, prefix="/api", tags=["Users"])
 app.include_router(Auth_router, prefix="/api", tags=["Authenticate"])
-
-
-
-@app.get("/")
-def root():
-    return {"message": "CMP2812 Full Stack Development Assessment 2"}
