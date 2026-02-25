@@ -33,3 +33,12 @@ def create_correction_notice(db: Session, notice_in: CorrectionsNoticeBase) -> C
     db.commit()
     db.refresh(notice)
     return notice
+
+# deletes a notice using the notice id | doesnt require authentication/login
+def delete_correction_notice(db: Session, notice_id: int):
+    notice = db.query(Corrections_notice_model).filter(Corrections_notice_model.NoticeID == notice_id).first()
+    if not notice:
+        return None
+    db.delete(notice)
+    db.commit()
+    return notice

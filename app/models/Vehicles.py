@@ -3,12 +3,12 @@ from app.db.base import Base
 
 class Vehicles(Base):
     __tablename__ = "Vehicles"
-    Drivers_license = Column(Integer)
+    DriversLicense = Column(Integer)
     Colour = Column(String(12))
     Make = Column(String(20))
     VIN = Column(String(17), primary_key=True)
-    License_plate = Column(String(8))
-    Registered_address = Column(String(20))
-    State_registered = Column(String(20))
-    Registered_year = Column(Integer)
-    Car_type = Column(String(20))
+    LicensePlate = Column(String(8))
+    RegisteredAddress = Column(String(20))
+    StateRegistered = Column(String(20))
+    RegisteredYear = Column(Integer)
+    CarType = Column(String(20))

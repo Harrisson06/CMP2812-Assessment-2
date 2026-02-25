@@ -1,5 +1,4 @@
 from sqlalchemy.orm import Session
-from typing import List, Optional
 from app.models.Notice_actions import Notice_actions as Notice_actions_model
 
 def get_notice_actions(db: Session):
