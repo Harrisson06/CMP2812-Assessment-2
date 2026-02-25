@@ -11,9 +11,9 @@ from app.crud.Officers import update_officer_lastname as crud_update_officer_las
 
 router = APIRouter()
 
-@router.get("/officers/linked-to-license/{drivers_license}", response_model=Officers)
-def read_officer_by_license(drivers_license: int, db: Session = Depends(get_db)):
-    officer = get_officer_by_license(db, drivers_license)
+@router.get("/officers/linked-to-license/{driversLicense}", response_model=Officers)
+def read_officer_by_license(driversLicense: int, db: Session = Depends(get_db)):
+    officer = get_officer_by_license(db, driversLicense)
     if not officer:
         # Raises a error code if there is no officer or license number in the database
         raise HTTPException(status_code=404, detail="No officer linked to this License")

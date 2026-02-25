@@ -15,7 +15,7 @@ def log_corrections_notice(notice_in: CorrectionsNoticeBase, db: Session = Depen
     
     driver = db.query(Drivers).filter(Drivers.DriverLicense == notice_in.DriversLicense).first()
     if not driver:
-        raise HTTPException(status_code=404, detail="Driver with this license not found in the datbase")
+        raise HTTPException(status_code=404, detail="No driver with this license found in database")
     
     return create_correction_notice(db, notice_in)
 

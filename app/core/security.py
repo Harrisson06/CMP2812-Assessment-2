@@ -6,7 +6,7 @@ import hashlib
 import base64
 
 
-SECRET_KEY = os.getenv("SECRET_KEY", "CHANGE_ME")                   # Secret key used to encrypt the password 
+SECRET_KEY = os.getenv("SECRET_KEY", "FullStack")                   # Secret key used to encrypt the password 
 ALGORITHM = "HS256"                                                 # The encryption algorithm im using 
 ACCESS_TOKEN_EXPIRE_MINUTES = 30                                    # Expiry time for each Token
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")   # IDK yet

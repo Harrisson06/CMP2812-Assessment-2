@@ -14,7 +14,7 @@ def get_correction_notice(db: Session, NoticeID: int) -> Optional[Corrections_no
 
 def get_violations_by_license(db: Session, drivers_license: int):
     return db.query(Corrections_notice_model).filter(
-        Corrections_notice_model.Drivers_license == drivers_license
+        Corrections_notice_model.DriversLicense == drivers_license
     ).all()
 
 # Creates a new correction notice and saving it to the database
