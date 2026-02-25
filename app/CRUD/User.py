@@ -17,7 +17,7 @@ def get_user_email_or_id(db: Session, identifier: str) -> Optional[UserModel]:
             officer_id = None
     except ValueError:
         officer_id = None
-    # checks if the identifier matches the email or the OfficerID
+    # Checks if the identifier matches the email or the OfficerID
     if officer_id is not None:
         return db.query(UserModel).filter(UserModel.OfficerID == officer_id).first()
     return db.query(UserModel).filter(UserModel.email == identifier).first()

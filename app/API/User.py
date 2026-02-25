@@ -8,6 +8,7 @@ from app.crud import User as Crud_user
 router = APIRouter(prefix="/Users", tags=["Users"])
 
 # API endpoint to register a new user | Checks for existing email and returns 201 on success
+@router.post("/", status_code=201, response_model=User)
 def register(user_in: UserCreate, db: Session = Depends(get_db)):
     # Verifies if the email is already registered in the database
     existing = Crud_user.get_user_by_email(db, user_in.email)

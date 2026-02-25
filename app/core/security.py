@@ -21,10 +21,6 @@ def prehash_password(password: str) -> str:
 # Combines pre-hashing with Bcrypt to securely store passwords in the database
 def hash_password(password: str) -> str:
     prehashed = prehash_password(password)
-    print(f"Original length: {len(password)}")
-    print(f"Prehashed length: {len(prehashed)}")
-    print(f"Prehashed value: {prehashed}")
-    print(f"Password length: {len(prehashed)}")
     return pwd_context.hash(prehashed)
 
 # Pre-hashes a plain text password and verifies it against a stored Bcrypt hash

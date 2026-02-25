@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional
 
-# # Base schema for the Officers table
+# Base schema for the Officers table
 class OfficersBase(BaseModel):
     FirstName: Optional[str] = None
     LastName: Optional[str] = None
