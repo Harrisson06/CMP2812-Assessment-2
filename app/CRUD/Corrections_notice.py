@@ -26,6 +26,7 @@ def create_correction_notice(db: Session, notice_in: CorrectionsNoticeBase) -> C
         Location = notice_in.Location,
         ViolationTime = notice_in.ViolationTime,
         ViolationDesc = notice_in.ViolationDesc,
+        Detachment = notice_in.Detachment,
         OfficerID = notice_in.OfficerID,
     )
     db.add(notice)

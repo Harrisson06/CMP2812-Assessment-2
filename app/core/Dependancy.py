@@ -21,7 +21,7 @@ Depends(oauth2_scheme)):
     try: 
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         email: Optional[str] = payload.get("sub")
-        if email is not None:
+        if email is None:
             raise credentials_exception
     except JWTError:
         raise credentials_exception

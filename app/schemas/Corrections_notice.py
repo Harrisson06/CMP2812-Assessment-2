@@ -10,7 +10,7 @@ class CorrectionsNoticeBase(BaseModel):
     Location: Optional[str] = None
     ViolationTime: Optional[time] = None
     ViolationDesc: Optional[str] = None
-    Detachment: Optional[str] = None
+    Detachment: Optional[str] = "Patrol Officer"
     OfficerID: int 
 
 # Full schema for Corrections_notice, allows orm mapping from the db models. 
