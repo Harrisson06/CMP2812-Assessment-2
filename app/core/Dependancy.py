@@ -10,6 +10,7 @@ from app.core.security import SECRET_KEY, ALGORITHM
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/Login")
 
+# Decodes the JWT token to verify and returns the current authenticated user
 def get_cur_user(db:Session = Depends(get_db), token: str = 
 Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
@@ -19,6 +20,7 @@ Depends(oauth2_scheme)):
     )
 
     try: 
+        # Extracts the email (sub) from the token payload
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         email: Optional[str] = payload.get("sub")
         if email is None:
@@ -26,6 +28,7 @@ Depends(oauth2_scheme)):
     except JWTError:
         raise credentials_exception
     
+    # Cross references the token email with the database to ensure the user exists 
     user = crud_user.get_user_by_email(db, email)
     if user is None:
         raise credentials_exception

@@ -9,6 +9,7 @@ def get_user_by_email(db: Session, email: str) -> Optional[UserModel]:
     # Filters stored emails for the one being used
     return db.query(UserModel).filter(UserModel.email == email).first()
 
+# Finds a user via their OfficerID or email
 def get_user_email_or_id(db: Session, identifier: str) -> Optional[UserModel]:
     try: 
         officer_id = int(identifier)

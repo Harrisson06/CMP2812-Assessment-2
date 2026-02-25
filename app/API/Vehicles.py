@@ -5,6 +5,7 @@ from app.crud.Vehicles import delete_vehicle
 
 router = APIRouter()
 
+# API endpoint to handle vehicle deletion requests via VIN
 @router.delete("/vehicles/delete/{vin}")
 def remove_vehicle(vin: str, db: Session = Depends(get_db)):
     vehicle = delete_vehicle(db, vin)

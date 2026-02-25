@@ -5,19 +5,20 @@ from app.models.Corrections_notice import Corrections_notice as Corrections_noti
 from app.schemas.Corrections_notice import CorrectionsNoticeBase
 
 def get_corrections_notice(db: Session) -> List[Corrections_notice_model]:
-    # returns all Notice action information taken by an officer
+    # Returns all correction notices from the database as a list
     return db.query(Corrections_notice_model).all()
 
 def get_correction_notice(db: Session, NoticeID: int) -> Optional[Corrections_notice_model]:
-    # returns all notice informaion relating to a specific noticeID
+    # Returns a single notice by its NoticeID | returns none if not found 
     return db.query(Corrections_notice_model).filter(Corrections_notice_model.NoticeID == NoticeID).first()
 
 def get_violations_by_license(db: Session, drivers_license: int):
+    # Returns all notices associated with a specific drivers license number
     return db.query(Corrections_notice_model).filter(
         Corrections_notice_model.DriversLicense == drivers_license
     ).all()
 
-# Creates a new correction notice and saving it to the database
+# Creates a new correction notice and adds it to the database
 def create_correction_notice(db: Session, notice_in: CorrectionsNoticeBase) -> Corrections_notice_model:
     notice = Corrections_notice_model(
         DriversLicense = notice_in.DriversLicense,
@@ -34,7 +35,7 @@ def create_correction_notice(db: Session, notice_in: CorrectionsNoticeBase) -> C
     db.refresh(notice)
     return notice
 
-# deletes a notice using the notice id | doesnt require authentication/login
+# Finds a notice by ID and deletes a notice using the notice id | Note: doesnt require authentication/login
 def delete_correction_notice(db: Session, notice_id: int):
     notice = db.query(Corrections_notice_model).filter(Corrections_notice_model.NoticeID == notice_id).first()
     if not notice:

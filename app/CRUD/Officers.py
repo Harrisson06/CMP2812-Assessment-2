@@ -13,6 +13,7 @@ def get_officer_by_license(db: Session, drivers_license: int) -> Optional[Office
         Corrections_notice, Corrections_notice.OfficerID == OfficersModel.OfficerID
     ).filter(Corrections_notice.DriversLicense == drivers_license).first()
 
+# Finds an officer via their OfficerID and changes their last name in the database
 def update_officer_lastname(db: Session, officer_id: int, new_lastname: str):
     officer = db.query(OfficersModel).filter(OfficersModel.OfficerID == officer_id).first()
     if not officer:
