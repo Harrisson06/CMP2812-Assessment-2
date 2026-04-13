@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.API.Corrections_notice import router as Corrections_router 
 from app.API.User import router as User_router
@@ -10,6 +11,14 @@ from app.db.init_db import init_db
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:5500", "http://localhost:5500"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
 init_db()
 
 app.include_router(Corrections_router, prefix="/api", tags=["Corrections"])
@@ -18,3 +27,4 @@ app.include_router(Auth_router, prefix="/api", tags=["Authenticate"])
 app.include_router(Officer_router, prefix="/api", tags=["Officers"])
 app.include_router(Driver_router, prefix="/api", tags=["Drivers"])
 app.include_router(Vehicle_router, prefix="/api", tags=["Vehicles"])
+

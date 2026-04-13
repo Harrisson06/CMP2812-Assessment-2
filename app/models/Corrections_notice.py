@@ -12,3 +12,4 @@ class Corrections_notice(Base):
     ViolationDesc = Column(String(255))
     Detachment = Column(String(30))
     OfficerID = Column(Integer, ForeignKey("Officers.OfficerID"))
+    Status = Column(String(20), default="Pending")

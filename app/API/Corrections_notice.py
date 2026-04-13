@@ -3,13 +3,14 @@ from sqlalchemy.orm import Session
 from app.db.session import get_db
 from app.core.Dependancy import get_cur_user
 from app.models.Drivers import Drivers
+from app.models.Corrections_notice import Corrections_notice
 from app.schemas.Corrections_notice import CorrectionsNoticeBase, CorrectionsNotice
 from app.crud.Corrections_notice import create_correction_notice, get_violations_by_license, delete_correction_notice
 
 router = APIRouter()
 
 # API endpoint to log a new correction notice | requires an euthenticated officer account
-@router.post("/corrections/log-correction", response_model=CorrectionsNotice)
+@router.post("/violations/log-notice", response_model=CorrectionsNotice)
 def log_corrections_notice(notice_in: CorrectionsNoticeBase, db: Session = Depends(get_db), current_user = Depends(get_cur_user)):
     # Verifies the user is an officer before allowing a notice to be logged
     if not current_user.OfficerID:
@@ -28,6 +29,14 @@ def get_my_violations( db: Session = Depends(get_db), current_user = Depends(get
     if not current_user.drivers_license:
         raise HTTPException(status_code=400, detail="No Drivers License links to your account")
     return get_violations_by_license(db, current_user.drivers_license)
+
+# API endpoint for officers to retrieve all correction notices
+@router.get("/corrections/all", response_model=list[CorrectionsNotice])
+def get_all_corrections(db: Session = Depends(get_db), current_user = Depends(get_cur_user)):
+    # Restrict to officers only
+    if not current_user.OfficerID:
+        raise HTTPException(status_code=403, detail="Officer access required")
+    return db.query(Corrections_notice).all()
 
 # API endpoint for an officer to delete a notice by its noticeID
 @router.delete("/corrections/delete-notice/{notice_id}")
