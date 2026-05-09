@@ -1,5 +1,6 @@
 from app.db.session import SessionLocal
 from app.models.User import User
+from app.models.officers import Officers
 from app.core.security import hash_password
 
 
@@ -21,14 +22,14 @@ USERS_TO_SEED = [
         "drivers_license": None,
     },
     {
-        "email": "Citizen@test.com",
+        "email": "Citizen1@test.com",
         "password": "Password1",
         "role": "Citizen",
         "OfficerID": None,
         "drivers_license": 822895210,
     },
     {
-        "email": "Citizen@test.com",
+        "email": "Citizen2@test.com",
         "password": "Password1",
         "role": "Citizen",
         "OfficerID": None, 
