@@ -12,7 +12,7 @@ router = APIRouter(tags=["Authenticate"])
 # API endpoint to authenticate users and issue JWT access tokens
 @router.post("/Login", response_model=Token)
 def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    # Look up user by emial or OfficerID provided in the login form
+    # Look up user by email or OfficerID provided in the login form
     user = CRUD_user.get_user_email_or_id(db, form_data.username)
 
     # Validates user and checks the hashed password
@@ -23,5 +23,5 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
             headers={"WWW-Authenticate": "Bearer"}
         )
     # Generates a fresh token for the authenticated session
-    token = create_access_token(subject=user.email)
+    token = create_access_token(subject=user.email, role=user.role)
     return {"access_token": token, "token_type": "Bearer"}

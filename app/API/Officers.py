@@ -4,14 +4,14 @@ from app.db.session import get_db
 from typing import List
 
 from app.schemas.Officers import Officers
-from app.core.Dependancy import get_cur_user
+from app.core.Dependency import get_cur_user
 from app.CRUD.Officers import get_officer_by_license
 from app.CRUD.Officers import get_officers
 from app.CRUD.Officers import update_officer_lastname as crud_update_officer_lastname
 
 router = APIRouter()
 
-# API endpoint to fetch an officer linked to a specific license via the ntoice table
+# API endpoint to fetch an officer linked to a specific license via the notice table
 @router.get("/officers/linked-to-license/{driversLicense}", response_model=Officers)
 def read_officer_by_license(driversLicense: int, db: Session = Depends(get_db)):
     officer = get_officer_by_license(db, driversLicense)

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.db.session import get_db
-from app.core.Dependancy import get_cur_user
+from app.core.Dependency import get_cur_user
 from app.models.Drivers import Drivers
 from app.models.Corrections_notice import Corrections_notice
 from app.schemas.Corrections_notice import CorrectionsNoticeBase, CorrectionsNotice
@@ -9,7 +9,7 @@ from app.CRUD.Corrections_notice import create_correction_notice, get_violations
 
 router = APIRouter()
 
-# API endpoint to log a new correction notice | requires an euthenticated officer account
+# API endpoint to log a new correction notice | requires an authenticated officer account
 @router.post("/violations/log-notice", response_model=CorrectionsNotice)
 def log_corrections_notice(notice_in: CorrectionsNoticeBase, db: Session = Depends(get_db), current_user = Depends(get_cur_user)):
     # Verifies the user is an officer before allowing a notice to be logged
@@ -41,7 +41,7 @@ def get_all_corrections(db: Session = Depends(get_db), current_user = Depends(ge
 # API endpoint for an officer to delete a notice by its noticeID
 @router.delete("/corrections/delete-notice/{notice_id}")
 def delete_notice(notice_id: int, db: Session = Depends(get_db), current_user = Depends(get_cur_user)):
-    # Restricts eletion to authenticated officers
+    # Restricts election to authenticated officers
     if not current_user.OfficerID:
         raise HTTPException(status_code=400, detail="No OfficerId linked to account")
     

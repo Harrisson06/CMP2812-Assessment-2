@@ -28,8 +28,8 @@ def verify_password(plain_password: str, password_hash: str) -> bool:
     return pwd_context.verify(prehash_password(plain_password), password_hash)
 
 # Generates a JWT token containing the user identity and an expiration timestamp 
-def create_access_token(subject: str, expires_minutes: int =
+def create_access_token(subject: str, role: str, expires_minutes: int =
     ACCESS_TOKEN_EXPIRE_MINUTES) -> str:
     expire = datetime.now(timezone.utc) + timedelta(minutes=expires_minutes)
-    payload = {"sub": subject, "exp": expire}
+    payload = {"sub": subject, "role": role, "exp": expire}
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)

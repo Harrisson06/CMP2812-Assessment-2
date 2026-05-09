@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.db.session import get_db
-from app.core.Dependancy import get_cur_user
+from app.core.Dependency import get_cur_user
 from app.CRUD.Drivers import update_driver_lastname, update_driver_address, delete_driver
 
 router = APIRouter()
@@ -19,10 +19,10 @@ def update_lastname(new_lastname: str, db: Session = Depends(get_db), current_us
         raise HTTPException(status_code=404, detail="Driver not found")
     return driver
 
-# API endpoint to update a drivers home ddress using their driving license number
+# API endpoint to update a drivers home address using their driving license number
 @router.put("/drivers/update-address")
 def update_address(driver_license: int, new_address: str, db: Session = Depends(get_db)):
-    # Driectly updates the address based on the provided drivers license number
+    # Directly updates the address based on the provided drivers license number
     driver = update_driver_address(db, driver_license, new_address)
     if not driver:
         raise HTTPException(status_code=404, detail="Driver not found")
