@@ -5,7 +5,7 @@ from app.core.Dependancy import get_cur_user
 from app.models.Drivers import Drivers
 from app.models.Corrections_notice import Corrections_notice
 from app.schemas.Corrections_notice import CorrectionsNoticeBase, CorrectionsNotice
-from app.crud.Corrections_notice import create_correction_notice, get_violations_by_license, delete_correction_notice
+from app.CRUD.Corrections_notice import create_correction_notice, get_violations_by_license, delete_correction_notice
 
 router = APIRouter()
 

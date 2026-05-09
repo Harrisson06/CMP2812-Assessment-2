@@ -5,9 +5,9 @@ from typing import List
 
 from app.schemas.Officers import Officers
 from app.core.Dependancy import get_cur_user
-from app.crud.Officers import get_officer_by_license
-from app.crud.Officers import get_officers
-from app.crud.Officers import update_officer_lastname as crud_update_officer_lastname
+from app.CRUD.Officers import get_officer_by_license
+from app.CRUD.Officers import get_officers
+from app.CRUD.Officers import update_officer_lastname as crud_update_officer_lastname
 
 router = APIRouter()
 
