@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, session
 
 
-SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:computing@localhost:3306/NYSPD"
+SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:SEPS@localhost:3306/NYSPD"
 
 # Creating the database engine using the above URL
 engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_pre_ping=True)
