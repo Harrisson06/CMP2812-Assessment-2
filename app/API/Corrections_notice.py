@@ -49,3 +49,10 @@ def delete_notice(notice_id: int, db: Session = Depends(get_db), current_user = 
     if not notice:
         raise HTTPException(status_code=404, detail="Notice not found")
     return {"detail": "Notice deleted Successfully"}
+
+@router.get("/violations/by-license/{drivers_license}")
+def get_violations_for_license(drivers_license: int, db: Session = Depends(get_db), current_user = Depends(get_cur_user)):
+    # Restricts access  to authenticated officers
+    if not current_user.OfficerID:
+        raise HTTPException(status_code=403, detail="Officer access required")
+    return get_violations_by_license(db, drivers_license)

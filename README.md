@@ -20,6 +20,6 @@ FAST API Assessment
 
 | Email | Password | Role |
 |---|---|---|
-| admin@test.com | Admin123 | Admin |
+| admin@test.com    | Admin123  | Admin   |
 | Citizen1@test.com | Driver123 | Citizen |
 | Citizen2@test.com | Driver123 | Citizen |
