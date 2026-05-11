@@ -21,9 +21,13 @@ def update_lastname(new_lastname: str, db: Session = Depends(get_db), current_us
 
 # API endpoint to update a drivers home address using their driving license number
 @router.put("/drivers/update-address")
-def update_address(driver_license: int, new_address: str, db: Session = Depends(get_db)):
-    # Directly updates the address based on the provided drivers license number
-    driver = update_driver_address(db, driver_license, new_address)
+def update_address(new_address: str, db: Session = Depends(get_db), current_user = Depends(get_cur_user)):
+    # Verifies that the logged in user has a drivers licence linked to their account 
+    if not current_user.drivers_license:
+        raise HTTPException(status_code=400, detail="No drivers license is linked to this account")
+    
+    # Update via CRUD using verified drivers license number
+    driver = update_driver_address(db, current_user.drivers_license, new_address)
     if not driver:
         raise HTTPException(status_code=404, detail="Driver not found")
     return driver
